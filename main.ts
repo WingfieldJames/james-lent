@@ -1,4 +1,8 @@
+controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
+    Character.vy += -200
+})
 let projectile: Sprite = null
+let Character: Sprite = null
 scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -121,7 +125,7 @@ scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
     `)
-let Character = sprites.create(img`
+Character = sprites.create(img`
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
     . . . . . . b b b b b b . . . . 
@@ -140,6 +144,14 @@ let Character = sprites.create(img`
     . . . c c c c c c c c b b . . . 
     `, SpriteKind.Player)
 Character.setPosition(10, 80)
+game.onUpdate(function () {
+    if (Character.y < 80) {
+        Character.ay += 300
+    } else {
+        Character.ay += 0
+        Character.vy += 0
+    }
+})
 game.onUpdateInterval(2000, function () {
     projectile = sprites.createProjectileFromSide(img`
         .....6feeeeeeeeeef6.....
